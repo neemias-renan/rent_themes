@@ -1,0 +1,46 @@
+{% extends "index.html" %} 
+{% block content %}
+    <div><p></p></div>
+    <h3>Cadastro de Temas</h3>
+    <hr>
+        <form action="/saveTheme/" method="post">
+            {% csrf_token %}
+            <div class="row mb-3">
+                <label class="col-sm-1 col-form-label" for="name">Nome</label>
+                <div class="col-sm-11">
+                    <input id="name" type="text" size="50" name="name">
+                </div>
+            </div>
+            <div class="row mb-3">
+                <label class="col-sm-1 col-form-label" for="">Cor</label>
+                <div class="col-sm-11">
+                    <input type="text" size="20" name="color">
+                </div>
+            </div>
+            <div class="row mb-3">
+                <label class="col-sm-1 col-form-label" for="">Preço</label>
+                <div class="col-sm-11">
+                    <input type="text" size="20" name="price">
+                    
+                </div>
+                
+            </div>
+            <hr>
+            <fieldset class="row mb-3">
+                <legend class="col-form-label col-sm-1 pt-0">Itens Tema</legend>
+                <div class="col-sm-11">
+                    {% for item in list_item %}
+                        {% if item%}   
+                            <div class="form-check">         
+                                <input id="{{item.id}}" class="form-check-input" type="checkbox" name="item" value="{{item.id}}">
+                                <label for="{{item.id}}">{{item.name}}</label>
+                            </div>
+                        {% endif%}
+                    {% endfor %}
+                </div>
+            </fieldset>
+            <hr>
+            <a class="btn btn-secondary btn-sm" href="/listTheme">Voltar</a>
+            <input class="btn btn-primary" type="submit" value="Gravar">
+        </form>
+{% endblock %}

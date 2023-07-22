@@ -1,0 +1,29 @@
+{% extends "index.html" %}
+{% block content %}
+<small>Clientes Cadastrados</small>
+<h3>Nossos Clientes</h3>
+<p class="descricao">Conheça os clientes que fazem parte da nossa história e confiam em nossos serviços para alcançar
+    seus objetivos. Seja
+    você também parte dessa jornada de sucesso!</p>
+<a class="button-3" href="/formClient">Novo Cliente →</a>
+<hr>
+{% if clients_list %}
+<div class="cards">
+    {% for client in clients_list%}
+    <div class="card-clientes">
+        <div>
+            <p class="card-nome">{{client.name}}</p>
+            <p class="card-email">{{client.email}}</p>
+        </div>
+        <div class="card-buttons">
+            <a href="/deleteClient/{{client.id}}"><button class="card-button-1">Excluir</button></a>
+            <a href="/detailClient/{{client.id}}"><button class="card-button-2">Editar</button></a>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+{% else %}
+<p class="descricao">Nenhum cliente cadastrado!!</p>
+{%endif%}
+
+{% endblock %}

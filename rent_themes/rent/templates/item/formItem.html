@@ -1,0 +1,25 @@
+{% extends "index.html" %} 
+{% block content %}
+    <div><p></p></div>
+    <h3>Cadastro de Item</h3>
+    <hr>
+        <form action="/saveItem/" method="post">
+            {% csrf_token %}
+            <div class="row mb-3">
+                <label class="col-sm-1 col-form-label" for="name">Nome</label>
+                <div class="col-sm-11">
+                    <input id="name" type="text" size="50" name="name">
+                </div>
+            </div>
+            <div class="row mb-3">
+                <label  class="col-sm-1 col-form-label" for="description">Descrição</label>
+                <div class="col-sm-11">
+                    <textarea id="description" cols="54" type="textarea"  name="description"></textarea>
+                </div>
+            </div>
+            <hr>
+            <a class="btn btn-secondary btn-sm" href="/listItem">Voltar</a>
+            <input class="btn btn-primary" class="btn btn-primary" type="submit" value="Gravar">
+        </form>
+        
+{% endblock %}

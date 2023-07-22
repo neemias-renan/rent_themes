@@ -1,0 +1,59 @@
+{% extends "index.html" %}
+{% block content %}
+<small>Temas disponiveis para alugar</small>
+<h3>Nossos temas</h3>
+<p class="descricao">Explore nossa ampla variedade de temas de festas para alugar e torne a comemoração do seu
+    filho(a) ainda mais especial!<br> Escolha entre temas clássicos, personagens favoritos e aventuras emocionantes para
+    criar memórias inesquecíveis.</p>
+
+<a class="button-3" href="/formTheme">Novo Tema →</a>
+<hr>
+
+<section class="section-themes">
+    {% if theme_list %}
+
+    {% for theme in theme_list%}
+    <div class="div-themes">
+        {% if theme.photo %}
+        <img class="section-themes-img" src="{{ theme.photo.url }}" alt="{{ theme.name }} - Foto">
+        {% endif %}
+
+        <h3>{{theme.name}}</h3>
+        <p></p>
+
+    </div>
+    {% endfor %}
+
+    {% else %}
+    <p>Nenhum tema cadastrado!!</p>
+    {%endif%}
+</section>
+
+{% endblock %}
+
+
+<!-- <table class="table table-striped">
+    {% if theme_list %}
+    <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Nome</th>
+            <th scope="col">Preço</th>
+            <th scope="col">Ações</th>
+            <th scope="col"></th>
+        </tr>
+    </thead>
+    {% for theme in theme_list%}
+    <tr>
+        <td>{{theme.id}}</td>
+
+        <td>{{theme.name}}</td>
+        <td>{{theme.price}}</td>
+        <td width='80'><a href="/deleteTheme/{{theme.id}}">Excluir</a></td>
+        <td><a href="/detailTheme/{{theme.id}}">Editar</a></td>
+    </tr>
+    {% endfor %}
+    {% else %}
+    <p>Nenhum tema cadastrado!!</p>
+    {%endif%}
+</table> -->

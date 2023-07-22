@@ -1,0 +1,103 @@
+{% extends "index.html" %} 
+{% block content %}
+    <div><p></p></div>
+    <h3>Cadastro de Aluguel</h3>
+    <hr>
+        <form action="/saveRent/" method="post">
+            {% csrf_token %}
+            <div class="row mb-3">
+                <label class="col-sm-1 col-form-label" for="date">Data</label>
+                <div class="col-sm-11">
+                    <input id="date" type="date" name="date">
+                </div>
+            </div> 
+
+            <div class="row mb-3">
+                <label class="col-sm-1 col-form-label" for="start">Hora Início</label>
+                <div class="col-sm-11">
+                    <input id="start" type="time" name="start_hours">
+                </div>
+            </div>
+
+            <div class="row mb-3">
+                <label class="col-sm-1 col-form-label"  for="end">Hora Fim</label>
+                <div class="col-sm-11">
+                    <input id="end" type="time" name="end_hours">
+                </div>
+            </div>
+            
+            <div class="row mb-3">
+                <label class="col-sm-1 col-form-label"  for="end">Tema</label>
+                <div class="col-sm-5">
+                    <select class="form-select" name="select_theme" id="">
+                        {% for theme in theme_list %}
+                            {% if theme%}            
+                                    <option value="{{theme.id}}">{{theme.name}}</option>
+                            {% endif%}
+                        {% endfor %}
+                    </select>
+                </div>
+            </div>
+
+            <div class="row mb-3">
+                <label class="col-sm-1 col-form-label"  for="end">Cliente</label>
+                <div class="col-sm-5">
+                    <select  class="form-select" name="select_client" id="">
+                        {% for client in client_list %}
+                            {% if client%}            
+                                    <option value="{{client.id}}">{{client.name}}</option>
+                            {% endif%}
+                        {% endfor %}
+                    </select> 
+                </div>
+            </div>
+
+            <div class="row mb-3">
+                <label class="col-sm-1 col-form-label"  for="street">Endereço</label>
+                <div class="col-sm-11">
+                    <input id="street" size="66" type="text" name="street">
+                </div>
+            </div>
+
+            <div class="row mb-3">
+                <label class="col-sm-1 col-form-label"  for="number">Número</label>
+                <div class="col-sm-11">
+                    <input id="number"  type="text" name="number">
+                </div>
+            </div>
+
+            <div class="row mb-3">
+                <label class="col-sm-1 col-form-label"  for="complement">Complemento</label>
+                <div class="col-sm-11">
+                    <input id="complement" size="66" type="text" name="complement">
+                </div>
+            </div>
+
+            <div class="row mb-3">
+                <label class="col-sm-1 col-form-label"  for="district">Bairro</label>
+                <div class="col-sm-11">
+                    <input id="district" size="66" type="text" name="district">
+                </div>
+            </div>
+
+            <div class="row mb-3">
+                <label class="col-sm-1 col-form-label"  for="city">Cidade</label>
+                <div class="col-sm-11">
+                    <input id="city" size="20" type="text" name="city">
+                </div>
+            </div>
+
+            <div class="row mb-3">
+                <label class="col-sm-1 col-form-label"  for="state">Estado</label>
+                <div class="col-sm-11">
+                    <input id="state" size="20" type="text" name="state">
+                </div>
+            </div>
+
+            <hr>
+            <a class="btn btn-secondary btn-sm" href="/listRent">Voltar</a>
+            <input class="btn btn-primary" type="submit" value="Gravar">
+        </form>
+        
+        
+{% endblock %}
