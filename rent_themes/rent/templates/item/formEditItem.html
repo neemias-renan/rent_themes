@@ -1,26 +1,31 @@
-{% extends "index.html" %} 
+{% extends "index.html" %}
+{% load static %}
 {% block content %}
-    <div><p></p></div>
-    <h3>Atualizar Item</h3>
-    <hr>
-        <form action="/updateItem/{{item.id}}" method="post">
-            {% csrf_token %}
-            <div class="row mb-3">
-                <label class="col-sm-1" for="">Nome</label>
-                <div class="col-sm-11">
-                    <input type="text" size="50" name="name" value="{{item.name}}">
-                </div>
+
+<small>Atualize um item</small>
+<h3>Atualize as informações sobre o item.</h3>
+
+<form action="/updateItem/{{item.id}}" method="post">
+    {% csrf_token %}
+    <div class="div-perfil-form">
+        <div class="div-perfil-form-infos">
+            <div>
+                <p class="descricao">Nome</p>
+                <input type="text" name="name" class="input-dados-usuario" placeholder="Nome do Item"
+                    value="{{item.name}}" required>
             </div>
-            <div class="row mb-3">
-                <label class="col-sm-1" for="">Descrição</label>
-                <div class="col-sm-11">
-                    <textarea  type="text" cols="53" name="description" value=""> {{item.description}}</textarea>
-                    
-                </div>
+            <div>
+                <p class="descricao">Descrição</p>
+                <textarea name="description" class="input-dados-usuario" placeholder="Crie uma breve descrição do item"
+                    rows="4" style="resize: none;" required> {{item.description}}</textarea>
             </div>
-            <hr>
-            <a class="btn btn-secondary btn-sm" href="/listItem">Voltar</a>
-            <input class="btn btn-primary" type="submit" value="Gravar">
-        </form>
-        
+            <input class="button-1" type="submit" value="Salvar Mudanças"
+                style="width: min-content;align-self: end;padding-left: 4em;padding-right: 4em;margin-top: 2em;">
+        </div>
+
+    </div>
+    </div>
+
+    </div>
+</form>
 {% endblock %}

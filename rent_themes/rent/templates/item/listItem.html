@@ -1,32 +1,32 @@
-{% extends "index.html" %} 
-    {% block content %}
-    <p></p>
-        <h3>Lista de Itens</h3>
-        <hr>
-        <table class="table table-striped">
-            {% if item_list %}
-            <thead>
-                <tr>
-                    <th scope="col">#</th>
-                    <th scope="col">Nome</th>
-                    <th scope="col">Descrição</th>
-                    <th scope="col">Ações</th>
-                    <th scope="col"></th>
-                </tr>
-            </thead>
-                {% for item in item_list%}
-                    <tr>
-                        <td>{{item.id}}</td>
-                        <td>{{item.name}}</td>
-                        <td>{{item.description}}</td>
-                        <td width='80'><a href="/deleteItem/{{item.id}}">Excluir</a></td>
-                        <td><a href="/detailItem/{{item.id}}">Editar</a></td>
-                    </tr>
-                {% endfor %}
-            {% else %}
-                <p>Nenhum item cadastrado!!</p>
-            {%endif%}
-        </table>
-        <hr>
-        <a class="btn btn-primary" href="/formItem">Novo Item</a>
-    {% endblock %}
+{% extends "index.html" %}
+{% load l10n %}
+{% block content %}
+
+<small>Itens Disponíveis</small>
+<h3>Lista de Itens</h3>
+<a class="button-3" href="/formItem" style="width: max-content;">Adicionar Item →</a>
+<div class="cards-rent">
+    {% if item_list %}
+    {% for item in item_list%}
+    <div class="card-rent">
+        <div class="card-rent-left">
+            <div class="card-rent-user">
+                <p class="card-rent-user-name">{{item.name}}</p>
+            </div>
+
+            <p class="card-rent-status">{{item.description}}</span>
+            </p>
+        </div>
+
+        <div class="card-rent-right">
+            <a href="/detailItem/{{item.id}}"> <button class="button-2">Editar</button></a>
+            <a href="/deleteItem/{{item.id}}"> <button class="button-3" style="margin: 0;">Apagar</button></a>
+        </div>
+    </div>
+    {% endfor %}
+    {% else %}
+    <p>Nenhum item cadastrado!!</p>
+    {%endif%}
+</div>
+
+{% endblock %}

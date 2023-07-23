@@ -1,103 +1,100 @@
-{% extends "index.html" %} 
+{% extends "index.html" %}
+{% load static %}
 {% block content %}
-    <div><p></p></div>
-    <h3>Cadastro de Aluguel</h3>
-    <hr>
-        <form action="/saveRent/" method="post">
-            {% csrf_token %}
-            <div class="row mb-3">
-                <label class="col-sm-1 col-form-label" for="date">Data</label>
-                <div class="col-sm-11">
-                    <input id="date" type="date" name="date">
-                </div>
-            </div> 
 
-            <div class="row mb-3">
-                <label class="col-sm-1 col-form-label" for="start">Hora Início</label>
-                <div class="col-sm-11">
-                    <input id="start" type="time" name="start_hours">
-                </div>
-            </div>
+<small>Cadastro de Aluguel</small>
+<h3>É um prazer ter você como nosso cliente.</h3>
 
-            <div class="row mb-3">
-                <label class="col-sm-1 col-form-label"  for="end">Hora Fim</label>
-                <div class="col-sm-11">
-                    <input id="end" type="time" name="end_hours">
-                </div>
-            </div>
-            
-            <div class="row mb-3">
-                <label class="col-sm-1 col-form-label"  for="end">Tema</label>
-                <div class="col-sm-5">
-                    <select class="form-select" name="select_theme" id="">
-                        {% for theme in theme_list %}
-                            {% if theme%}            
-                                    <option value="{{theme.id}}">{{theme.name}}</option>
-                            {% endif%}
+<form action="/saveRent/" method="post">
+    {% csrf_token %}
+    <div class="div-perfil-form">
+        <div class="div-perfil-form-infos">
+
+            <div class="div-user-client">
+                <p class="descricao">Cliente</p>
+                <div class="">
+                    <select class="input-dados-usuario" name="select_client" id="">
+                        {% for client in client_list %}
+                        {% if client%}
+                        <option value="{{client.id}}">{{client.name}}</option>
+                        {% endif%}
                         {% endfor %}
                     </select>
                 </div>
             </div>
 
-            <div class="row mb-3">
-                <label class="col-sm-1 col-form-label"  for="end">Cliente</label>
-                <div class="col-sm-5">
-                    <select  class="form-select" name="select_client" id="">
-                        {% for client in client_list %}
-                            {% if client%}            
-                                    <option value="{{client.id}}">{{client.name}}</option>
+            <div>
+                <h4>Dados do Evento</h4>
+                <div>
+                    <p class="descricao">Data</p>
+                    <input type="date" name="date" class="input-dados-usuario" required>
+                </div>
+
+                <div class="card-rent-horas">
+                    <div>
+                        <p class="descricao">Hora de Início</p>
+                        <input type="time" name="start_hours" class="input-dados-usuario" required>
+
+                    </div>
+                    <div>
+                        <p class="descricao">Hora que termina</p>
+                        <input type="time" name="end_hours" class="input-dados-usuario" required>
+                    </div>
+                </div>
+                <div class="">
+                    <p class="descricao">Tema</p>
+                    <div class="">
+                        <select class="input-dados-usuario" name="select_theme" id="">
+                            {% for theme in theme_list %}
+                            {% if theme%}
+                            <option class="input-dados-usuario" value="{{theme.id}}">{{theme.name}}</option>
                             {% endif%}
-                        {% endfor %}
-                    </select> 
+                            {% endfor %}
+                        </select>
+                    </div>
                 </div>
             </div>
 
-            <div class="row mb-3">
-                <label class="col-sm-1 col-form-label"  for="street">Endereço</label>
-                <div class="col-sm-11">
-                    <input id="street" size="66" type="text" name="street">
+            <div>
+                <h4>Localização do Evento</h4>
+                <div>
+                    <p class="descricao">Endereço do Evento</p>
+                    <input type="text" name="street" class="input-dados-usuario" required>
+                </div>
+
+                <div>
+                    <p class="descricao">Número do local</p>
+                    <input type="number" name="number" class="input-dados-usuario" required>
+                </div>
+
+                <div>
+                    <p class="descricao">Complemento</p>
+                    <input type="text" name="complement" class="input-dados-usuario">
+                </div>
+
+                <div>
+                    <p class="descricao">Bairro</p>
+                    <input size="66" type="text" name="district" class="input-dados-usuario">
+                </div>
+
+                <div>
+                    <p class="descricao">Cidade</p>
+                    <input size="20" type="text" name="city" class="input-dados-usuario">
+                </div>
+
+                <div>
+                    <p class="descricao">Estado</p>
+                    <input size="20" type="text" name="state" class="input-dados-usuario">
                 </div>
             </div>
+            <input class="button-1" type="submit" value="Alugar Tema"
+                style="width: min-content;align-self: end;padding-left: 4em;padding-right: 4em;margin-top: 2em;">
+        </div>
+    </div>
 
-            <div class="row mb-3">
-                <label class="col-sm-1 col-form-label"  for="number">Número</label>
-                <div class="col-sm-11">
-                    <input id="number"  type="text" name="number">
-                </div>
-            </div>
+    </div>
+</form>
 
-            <div class="row mb-3">
-                <label class="col-sm-1 col-form-label"  for="complement">Complemento</label>
-                <div class="col-sm-11">
-                    <input id="complement" size="66" type="text" name="complement">
-                </div>
-            </div>
 
-            <div class="row mb-3">
-                <label class="col-sm-1 col-form-label"  for="district">Bairro</label>
-                <div class="col-sm-11">
-                    <input id="district" size="66" type="text" name="district">
-                </div>
-            </div>
 
-            <div class="row mb-3">
-                <label class="col-sm-1 col-form-label"  for="city">Cidade</label>
-                <div class="col-sm-11">
-                    <input id="city" size="20" type="text" name="city">
-                </div>
-            </div>
-
-            <div class="row mb-3">
-                <label class="col-sm-1 col-form-label"  for="state">Estado</label>
-                <div class="col-sm-11">
-                    <input id="state" size="20" type="text" name="state">
-                </div>
-            </div>
-
-            <hr>
-            <a class="btn btn-secondary btn-sm" href="/listRent">Voltar</a>
-            <input class="btn btn-primary" type="submit" value="Gravar">
-        </form>
-        
-        
 {% endblock %}

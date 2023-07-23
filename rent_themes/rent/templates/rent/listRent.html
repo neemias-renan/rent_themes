@@ -1,40 +1,34 @@
-{% extends "index.html" %} 
-    {% block content %}
-    <p></p>
-        <h3>Lista de Alugueis</h3>
-        <hr>
-        <table class="table table-striped">
-            {% if rent_list %}
-                <thead>
-                    <tr>
-                        <th scope="col">#</th>
-                        <th scope="col">Tema</th>
-                        <th scope="col">Cliente</th>
-                        <th scope="col">Data Aluguel</th>
-                        <th scope="col">Hora início</th>
-                        <th scope="col">Hora Fim</th>
-                        <th scope="col">Preço Final</th>
-                        <th scope="col">Ações</th>
-                        <th scope="col"></th>
-                    </tr>
-                </thead>
-                {% for rent in rent_list%}
-                    <tr>
-                        <td width='15'>{{rent.id}}</td>
-                        <td width='170'>{{rent.theme.name}}</td>
-                        <td width='170'>{{rent.client.name}}</td>
-                        <td width='170'>{{rent.date}}</td>
-                        <td width='170'>{{rent.start_hours}}</td>
-                        <td width='170'>{{rent.end_hours}}</td>
-                        <td width='170'>{{rent.total_price}}</td>
-                        <td width='70'><a href="/deleteRent/{{rent.id}}">Excluir</a></td>
-                        <td><a href="/detailRent/{{rent.id}}">Editar</a></td>
-                    </tr>
-                {% endfor %}
-            {% else %}
-                <p>Nenhum item cadastrado!!</p>
-            {%endif%}
-        </table>
-        <hr>
-        <a class="btn btn-primary" href="/formRent">Novo Aluguel</a>
-    {% endblock %}
+{% extends "index.html" %}
+{% load l10n %}
+{% block content %}
+
+<small>Lista de Alugueis</small>
+<h3>Alugados mais recentes</h3>
+<a class="button-3" href="/formRent">Alugar tema →</a>
+<div class="cards-rent">
+    {% if rent_list %}
+    {% for rent in rent_list%}
+    <div class="card-rent">
+        <div class="card-rent-left">
+            <div class="card-rent-user">
+                <img class="card-rent-user-img" src="{{rent.client.perfil.url}}" alt="{{rent.client.name}}">
+                <p class="card-rent-user-name">{{rent.client.name}}</p>
+            </div>
+
+            <p class="card-rent-status">Alugou o tema <span>{{rent.theme.name}}</span> para
+                <span>{{rent.date|date:"d/m"}}.</span> • Por <span>R${{rent.total_price}}</span>
+            </p>
+        </div>
+
+        <div class="card-rent-right">
+            <a href="/detailRent/{{rent.id}}"> <button class="button-2">Editar Aluguel</button></a>
+            <a href="/deleteRent/{{rent.id}}"> <button class="button-3" style="margin: 0;">Apagar</button></a>
+        </div>
+    </div>
+    {% endfor %}
+    {% else %}
+    <p>Nenhum item cadastrado!!</p>
+    {%endif%}
+</div>
+
+{% endblock %}

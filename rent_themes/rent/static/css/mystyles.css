@@ -47,7 +47,8 @@ a {
 #content {
     padding-left: 2rem;
     padding-right: 2rem;
-    margin: 80px 271.5px 0em;
+    margin: 80px 271.5px 15em;
+    
 }
 
 h3 {
@@ -70,7 +71,6 @@ small {
     font-size: 16px;
     line-height: 28px;
     color: #475569;
-    width: 624px;
 }
 
 
@@ -136,6 +136,23 @@ hr {
     cursor: pointer;
 }
 
+.button-1 {
+    display: flex;
+    padding: 11px 15.77px 12px 16px;
+    justify-content: center;
+    align-items: flex-start;
+    border-radius: 8px;
+    background: rgb(79, 70, 229);
+    color: white;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 20px;
+    font-family: 'Inter', sans-serif;
+    border: none;
+    cursor: pointer;
+}
+
 
 .card-button-2 {
     display: flex;
@@ -153,6 +170,23 @@ hr {
     width: 8em;
     cursor: pointer;
 }
+
+.button-2 {
+    display: flex;
+    padding: 11px 15.77px 12px 16px;
+    justify-content: center;
+    align-items: flex-start;
+    border-radius: 8px;
+    background: none;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 20px;
+    font-family: 'Inter', sans-serif;
+    border: solid 1px rgb(237 237 237);
+    cursor: pointer;
+}
+
 
 .button-3 {
     display: flex;
@@ -180,15 +214,212 @@ hr {
 }
 
 .div-themes {
-    height: 50em;
-    width: 53%;
+    width: 100%;
     display: flex;
     flex-direction: row;
     gap: 6em;
 }
 
 .section-themes-img {
-    width: 100%;
-    height: 100%;
+    width: 488.008px;
+    height: 488.008px;
     object-fit: cover;
+    border-radius: 10px;
+}
+
+.card-perfil {
+    display: flex;
+    flex-direction: row;
+    gap: 1em;
+}
+
+.info-perfil {
+    align-self: center;
+}
+
+.img-perfil {
+    width: 3em;
+    height: 3em;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+@media (max-width:1400px) {
+    #sidebar {
+        margin: 0em 6em;
+    }
+
+    #content {
+        margin: 80px 6em 8em;
+    }
+}
+
+.theme-div-buttons {
+    display: flex;
+    flex-direction: row;
+    margin-top: 5em;
+    gap: 1em;
+}
+
+
+
+
+
+.div-perfil-form {
+    display: flex;
+    flex-direction: row;
+    gap: 5em;
+    margin-top: 4em;
+}
+
+.perfil-imagem {
+    object-fit: cover;
+    width: 24em;
+    height: 24em;
+    border: solid 1px white !important;
+}
+
+.file-img-perfil {
+    display: none;
+}
+
+.div-perfil-imagem-preview {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+    gap: 1em;
+    margin-top: 3.7em;
+}
+
+.div-perfil-form-infos {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+.input-dados-usuario {
+    width: -webkit-fill-available;
+    border: 1px solid #0a0a0a38;
+    padding: 23px 24px 16px 24px;
+    background: none;
+    font-family: 'Inter', sans-serif;
+}
+
+.div-number-perfil {
+    display: flex;
+    flex-direction: row;
+    gap: 1em;
+}
+
+/* Styles for the item list fieldset */
+.item-list {
+    border: 1px solid #ccc;
+    padding: 10px;
+    margin-bottom: 15px;
+    margin-top: 2em;
+}
+
+/* Styles for the item list title */
+.item-list-title {
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+/* Styles for the item list container */
+.item-list-container {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+/* Styles for each item */
+.item {
+    display: flex;
+    align-items: center;
+    width: 100%;
+}
+
+/* Styles for the item checkbox */
+.item-checkbox {
+    margin-right: 5px;
+}
+
+/* Styles for the item label */
+.item label {
+    font-weight: bold;
+}
+
+/* Styles for the item description */
+.item-description {
+    margin-left: 25px;
+    font-style: italic;
+    color: #666;
+}
+
+
+
+.cards-rent {
+    display: flex;
+    flex-direction: column;
+    margin-top: 6em;
+}
+
+.card-rent {
+    padding: 2em 0em;
+    border-top: solid 1px #d8d8d8;
+    
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.card-rent-left {
+    gap: 0.9em;
+    display: flex;
+    flex-direction: column;
+}
+
+.card-rent-right {
+    display: flex;
+    align-items: center;
+    gap: 2em;
+}
+
+.card-rent-user {
+    display: flex;
+    flex-direction: row;
+    gap: 1em;
+    align-items: center;
+}
+
+.card-rent-user-img {
+    width: 1.5em;
+    height: 1.5em;
+    border-radius: 50%;
+}
+
+.card-rent-user-name {
+    font-size: 0.875rem;
+    font-weight: 600;
+    margin: 0;
+}
+
+.card-rent-status {
+    font-size: 0.875rem;
+    margin: 0;
+    color: #777777;
+}
+
+.card-rent-status span {
+    color: #2d2d2d;
+}
+
+.card-rent-horas{
+    display: flex;
+    flex-direction: row;
+    gap: 2em;
+}
+
+.div-user-client{
+    margin-bottom: 2em;
 }

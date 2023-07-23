@@ -1,9 +1,9 @@
-from django.shortcuts import redirect, render
+from django.shortcuts import render, redirect
 from .models import *
 from .dao import *
 
 def index(request):
-    return render(request, 'index.html')
+    return redirect('/listClient')
 
 class ClientViews:
     def listClient(request):
@@ -16,6 +16,7 @@ class ClientViews:
 
     def saveClient(request):
         if request.method == 'POST':
+            perfil = request.FILES.get('perfil')
             name = request.POST['name']
             email = request.POST['email']
             ddd1 = request.POST['ddd1']
@@ -23,7 +24,7 @@ class ClientViews:
             ddd2 = request.POST['ddd2']
             phone2 = request.POST['phone2']
 
-            ClienteDAO().salvarCliente(name, email, ddd1, phone1, ddd2, phone2)
+            ClienteDAO().salvarCliente(perfil, name, email, ddd1, phone1, ddd2, phone2)
             return redirect('/listClient')
 
     def deleteClient(request, id):
@@ -36,13 +37,14 @@ class ClientViews:
 
     def updateClient(request, id):
         if request.method == 'POST':
+            perfil = request.FILES.get('perfil')
             name = request.POST['name']
             email = request.POST['email']
             ddd1 = request.POST['ddd1']
             phone1 = request.POST['phone1']
             ddd2 = request.POST['ddd2']
             phone2 = request.POST['phone2']
-            ClienteDAO().atualizarCliente(id, name, email, ddd1, phone1, ddd2, phone2)
+            ClienteDAO().atualizarCliente(id, perfil, name, email, ddd1, phone1, ddd2, phone2)
             return redirect('/listClient')
 
 class ThemeViews:
@@ -56,7 +58,7 @@ class ThemeViews:
         return render(request, 'theme/formTheme.html', {'list_item':list_item})
 
     def saveTheme(request):
-        TemaDAO().salvaTema(name=request.POST['name'],color=request.POST['color'], price=request.POST['price'], my_list=request.POST.getlist('item'))
+        TemaDAO().salvaTema(photo = request.FILES.get('photo'), description=request.POST['description'], name=request.POST['name'],color=request.POST['color'], price=request.POST['price'], my_list=request.POST.getlist('item'))
         return redirect('/listTheme')
     
     def deleteTheme(request, id):
@@ -68,7 +70,7 @@ class ThemeViews:
         return render(request, 'theme/formEditTheme.html', {'theme': theme} )
 
     def updateTheme(request, id):
-        TemaDAO().atualizarTema(id=id, name = request.POST['name'], color = request.POST['color'], price = request.POST['price'])
+        TemaDAO().atualizarTema(id=id, photo = request.FILES.get('photo'), name = request.POST['name'],description=request.POST['description'], color = request.POST['color'], price = request.POST['price'])
         return redirect('/listTheme')
 
 class ItemViews:

@@ -11,13 +11,15 @@
 <div class="cards">
     {% for client in clients_list%}
     <div class="card-clientes">
-        <div>
-            <p class="card-nome">{{client.name}}</p>
-            <p class="card-email">{{client.email}}</p>
+        <div class="card-perfil">
+            <img class="img-perfil" src="{{client.perfil.url}}" alt="Foto de perfil de {{client.name}}">
+            <div class="info-perfil">
+                <p class="card-nome">{{client.name}}</p>
+                <p class="card-email">{{client.email}}</p>
+            </div>
         </div>
         <div class="card-buttons">
-            <a href="/deleteClient/{{client.id}}"><button class="card-button-1">Excluir</button></a>
-            <a href="/detailClient/{{client.id}}"><button class="card-button-2">Editar</button></a>
+            <a href="/detailClient/{{client.id}}"><button class="card-button-1">Editar</button></a>
         </div>
     </div>
     {% endfor %}

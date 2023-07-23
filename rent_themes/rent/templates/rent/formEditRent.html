@@ -1,76 +1,74 @@
-{% extends "index.html" %} 
+{% extends "index.html" %}
+{% load static %}
 {% block content %}
-    <div><p></p></div>
-    <h3>Atualizar Aluguel</h3>
-    <hr>
-        <form action="/updateRent/{{rent.id}}" method="post">
-            {% csrf_token %}
-            <div class="row mb-3">
-                <label class="col-sm-1 col-form-label" for="date">Data</label>
-                <div class="col-sm-11">
-                    <input id="date" type="date" name="date" value="{{rent.date|date:'Y-m-d'}}">
+
+<small>Atualizar cadastro de aluguel</small>
+<h3>Olá, {{rent.client.name}}!</h3>
+<p class="descricao">O tema que você alugou foi o {{rent.theme.name}}!</p>
+
+<form action="/updateRent/{{rent.id}}" method="post">
+    {% csrf_token %}
+    <div class="div-perfil-form">
+        <div class="div-perfil-form-infos">
+            <div>
+                <h4>Dados do Evento</h4>
+                <div>
+                    <p class="descricao">Data</p>
+                    <input type="date" name="date" class="input-dados-usuario" value="{{rent.date|date:'Y-m-d'}}" required>
                 </div>
-            </div>
-            
-            <div class="row mb-3">
-                <label class="col-sm-1 col-form-label" for="start">Hora Início</label>
-                <div class="col-sm-11">
-                    <input id="start" type="time" name="start_hours" value="{{rent.start_hours}}">
-                </div>
-            </div>
-            
-            <div class="row mb-3">
-                <label class="col-sm-1 col-form-label" for="end">Hora Fim</label>
-                <div class="col-sm-11">
-                    <input id="end" type="time" name="end_hours" value="{{rent.end_hours}}">
+
+                <div class="card-rent-horas">
+                    <div>
+                        <p class="descricao">Hora de Início</p>
+                        <input type="time" name="start_hours" class="input-dados-usuario"  value="{{rent.start_hours}}" required>
+
+                    </div>
+                    <div>
+                        <p class="descricao">Hora que termina</p>
+                        <input type="time" name="end_hours" class="input-dados-usuario" value="{{rent.end_hours}}" required>
+                    </div>
                 </div>
             </div>
 
-            <div class="row mb-3">
-                <label class="col-sm-1 col-form-label"  for="street">Endereço</label>
-                <div class="col-sm-11">
-                    <input id="street" size="66" type="text" name="street" value="{{rent.address.street}}">
+            <div>
+                <h4>Localização do Evento</h4>
+                <div>
+                    <p class="descricao">Endereço do Evento</p>
+                    <input type="text" name="street" class="input-dados-usuario" value="{{rent.address.street}}" required>
+                </div>
+
+                <div>
+                    <p class="descricao">Número do local</p>
+                    <input type="number" name="number" class="input-dados-usuario" value="{{rent.address.number}}" required>
+                </div>
+
+                <div>
+                    <p class="descricao">Complemento</p>
+                    <input type="text" name="complement" class="input-dados-usuario" value="{{rent.address.complement}}">
+                </div>
+
+                <div>
+                    <p class="descricao">Bairro</p>
+                    <input size="66" type="text" name="district" class="input-dados-usuario" value="{{rent.address.district}}" required>
+                </div>
+
+                <div>
+                    <p class="descricao">Cidade</p>
+                    <input size="20" type="text" name="city" class="input-dados-usuario" value="{{rent.address.city}}" required>
+                </div>
+
+                <div>
+                    <p class="descricao">Estado</p>
+                    <input size="20" type="text" name="state" class="input-dados-usuario"  value="{{rent.address.state}}" required>
                 </div>
             </div>
+            <input class="button-1" type="submit" value="Salvar Mudanças"
+                style="width: min-content;align-self: end;padding-left: 4em;padding-right: 4em;margin-top: 2em;">
+        </div>
+    </div>
 
-            <div class="row mb-3">
-                <label class="col-sm-1 col-form-label"  for="number">Número</label>
-                <div class="col-sm-11">
-                    <input id="number"  type="text" name="number" value="{{rent.address.number}}">
-                </div>
-            </div>
+    </div>
+</form>
 
-            <div class="row mb-3">
-                <label class="col-sm-1 col-form-label"  for="complement">Complemento</label>
-                <div class="col-sm-11">
-                    <input id="complement" size="66" type="text" name="complement" value="{{rent.address.complement}}">
-                </div>
-            </div>
 
-            <div class="row mb-3">
-                <label class="col-sm-1 col-form-label"  for="district">Bairro</label>
-                <div class="col-sm-11">
-                    <input id="district" size="66" type="text" name="district" value="{{rent.address.district}}">
-                </div>
-            </div>
-
-            <div class="row mb-3">
-                <label class="col-sm-1 col-form-label"  for="city">Cidade</label>
-                <div class="col-sm-11">
-                    <input id="city" size="20" type="text" name="city" value="{{rent.address.city}}">
-                </div>
-            </div>
-
-            <div class="row mb-3">
-                <label class="col-sm-1 col-form-label"  for="state">Estado</label>
-                <div class="col-sm-11">
-                    <input id="state" size="20" type="text" name="state" value="{{rent.address.state}}">
-                </div>
-            </div>
-
-            <hr>
-            <a class="btn btn-secondary btn-sm" href="/listRent">Voltar</a>    
-            <input class="btn btn-primary" type="submit" value="Gravar">
-        </form>
-        
 {% endblock %}

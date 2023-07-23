@@ -5,15 +5,15 @@ class ClienteDAO:
     def listaClientes(self):
         return Client.objects.all()
 
-    def salvarCliente(self, name, email,ddd1,number1, ddd2, number2):
-        c = Client(name=name,email=email)
+    def salvarCliente(self, perfil, name, email,ddd1,number1, ddd2, number2):
+        c = Client(perfil=perfil,name=name,email=email)
         c.save()
 
-        if ddd1 and number1:
+        if ddd1 != "" and number1 != "":
             t1 = Phone(ddd=ddd1, number=number1, client=c)
             t1.save()
 
-        if ddd2 and number2:
+        if ddd2 != "" and number2 != "":
             t2 = Phone(ddd=ddd2, number=number2, client=c)
             t2.save()
 
@@ -24,14 +24,16 @@ class ClienteDAO:
     def detalharCliente(self, id):
         return Client.objects.get(pk=id)
     
-    def atualizarCliente(self, id, name, email, ddd1,number1, ddd2, number2):
+    def atualizarCliente(self, id, perfil, name, email, ddd1,number1, ddd2, number2):
         c = Client.objects.get(pk=id)
         c.name = name
         c.email = email
+        if perfil != None:
+            c.perfil = perfil
         c.save()
         phones = Phone.objects.filter(client=c)
 
-        if ddd1 and number1:
+        if ddd1 != "" and number1 != "":
             if(phones.first()):
                 t1 = phones.first()
                 t1.ddd = ddd1
@@ -41,7 +43,7 @@ class ClienteDAO:
                 t1 = Phone(ddd=ddd1, number=number1, client=c)
                 t1.save()
                       
-        if ddd2 and number2:
+        if ddd2 != "" and number2 != "":
             if(phones.last() and phones.count()>1):
                 t2 = phones.last()
                 t2.ddd = ddd2
@@ -89,8 +91,8 @@ class TemaDAO:
     def listaTemas(self):
         return Theme.objects.all()
     
-    def salvaTema(self, name, color, price, my_list):
-        t = Theme(name=name,color=color, price=price)
+    def salvaTema(self ,photo,description, name, color, price, my_list):
+        t = Theme(photo=photo,name=name,color=color, price=price, description=description)
         t.save()
 
         my_list = my_list
@@ -107,11 +109,14 @@ class TemaDAO:
     def detalharTema(self, id):
         return Theme.objects.get(pk=id)
 
-    def atualizarTema(self, id, name, color, price):
+    def atualizarTema(self,photo, description, id, name, color, price):
         t = self.detalharTema(id)
         t.name = name
         t.color = color
         t.price = price
+        if photo != None:
+            t.photo = photo
+        t.description = description
         t.save()
 
 class ItemDAO:

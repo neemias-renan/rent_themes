@@ -1,25 +1,33 @@
-{% extends "index.html" %} 
+{% extends "index.html" %}
+{% load static %}
 {% block content %}
-    <div><p></p></div>
-    <h3>Cadastro de Item</h3>
-    <hr>
-        <form action="/saveItem/" method="post">
-            {% csrf_token %}
-            <div class="row mb-3">
-                <label class="col-sm-1 col-form-label" for="name">Nome</label>
-                <div class="col-sm-11">
-                    <input id="name" type="text" size="50" name="name">
-                </div>
+
+<small>Novo item</small>
+<h3>Adicione um novo item ao estoque.</h3>
+
+<form action="/saveItem/" method="post">
+    {% csrf_token %}
+    <div class="div-perfil-form">
+        <div class="div-perfil-form-infos">
+            <div>
+                <p class="descricao">Nome</p>
+                <input type="text" name="name" class="input-dados-usuario" placeholder="Nome do Item" required>
             </div>
-            <div class="row mb-3">
-                <label  class="col-sm-1 col-form-label" for="description">Descrição</label>
-                <div class="col-sm-11">
-                    <textarea id="description" cols="54" type="textarea"  name="description"></textarea>
-                </div>
+            <div>
+                <p class="descricao">Descrição</p>
+                <textarea name="description" class="input-dados-usuario" placeholder="Crie uma breve descrição do item"
+                    rows="4" style="resize: none;" required></textarea>
             </div>
-            <hr>
-            <a class="btn btn-secondary btn-sm" href="/listItem">Voltar</a>
-            <input class="btn btn-primary" class="btn btn-primary" type="submit" value="Gravar">
-        </form>
-        
+            <input class="button-1" type="submit" value="Adicionar Item"
+                style="width: min-content;align-self: end;padding-left: 4em;padding-right: 4em;margin-top: 2em;">
+        </div>
+
+    </div>
+    </div>
+
+    </div>
+</form>
+
+
+
 {% endblock %}

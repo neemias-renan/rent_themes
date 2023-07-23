@@ -18,10 +18,18 @@
         <img class="section-themes-img" src="{{ theme.photo.url }}" alt="{{ theme.name }} - Foto">
         {% endif %}
 
-        <h3>{{theme.name}}</h3>
-        <p></p>
-
+        <div>
+            <h3>{{theme.name}}</h3>
+            <p class="descricao">{{theme.description}}</p>
+            <p><strong>Por R${{theme.price}}</strong></p>
+            <div class="theme-div-buttons ">
+                <a href="/detailTheme/{{theme.id}}"><button class="button-1">Editar tema</button></a>
+                <a href="/deleteTheme/{{theme.id}}"><button class="button-2">Excluir esse tema</button></a>
+            </div>
+        </div>
     </div>
+    
+    <hr>
     {% endfor %}
 
     {% else %}

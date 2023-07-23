@@ -1,41 +1,107 @@
-{% extends "index.html" %} 
+{% extends "index.html" %}
+{% load static %}
 {% block content %}
-    <div><p></p></div>
-    <h3>Atualizar Clientes</h3>
-    <hr>
-        <form action="/updateClient/{{client.id}}" method="post">
-            {% csrf_token %}
-            <div class="row mb-3">
-                <label class="col-sm-1 col-form-label" for="name">Nome</label>
-                <div class="col-sm-11">
-                    <input id="name" type="text" size="50" name="name" value="{{client.name}}">
+
+<small>Atualizar Cliente</small>
+<h3>Atualize os seus dados</h3>
+<form action="/updateClient/{{client.id}}" method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    <div class="div-perfil-form">
+        <div class="div-perfil-imagem-preview">
+            <img class="perfil-imagem" src="{{client.perfil.url}}" id="avatarView">
+            <input type="file" id="file" class="file-img-perfil" name="perfil" accept="image/*">
+            <input type="button" id="fileInput" class="button-2" value="Envie uma nova Foto" style="width: 100%;" />
+        </div>
+
+        <div class="div-perfil-form-infos">
+            <div>
+                <p class="descricao">Nome</p>
+                <input type="text" id="name" size="50" name="name" class="input-dados-usuario" placeholder="Seu nome"
+                    value="{{client.name}}" required>
+            </div>
+
+            <div>
+                <p class="descricao">E-mail</p>
+                <input type="email" id="email" size="50" name="email" class="input-dados-usuario"
+                    value="{{client.email}}" required>
+            </div>
+
+            <div>
+                <p class="descricao">Telefone Principal</p>
+                <div class="div-number-perfil">
+                    {% if client.phones.all.count >= 1 %}
+                    <input type="text" id="ddd1" size="3" name="ddd1" placeholder="84" class="input-dados-usuario"
+                        style="width: 3em;" value={{client.phones.all.first.ddd}} style="width: 3em;" required>
+                    <input type="text" id="phone1" size="10" name="phone1" placeholder="99419-2907"
+                        pattern="[0-9]{5}-[0-9]{4}" class="input-dados-usuario" value={{client.phones.all.first.number}}
+                        required>
+                    {% else %}
+                    <input type="text" id="phone1" size="3" name="ddd1" value="" style="width: 3em;"
+                        class="input-dados-usuario">
+                    <input type="text" id="phone1" size="10" name="phone1" pattern="[0-9]{5}-[0-9]{4}" value=""
+                        class="input-dados-usuario">
+                    {% endif %}
                 </div>
             </div>
-            <div class="row mb-3">
-                <label class="col-sm-1 col-form-label" for="email">e-Mail</label>
-                <div class="col-sm-11">
-                    <input type="email" id="email" size="50" name="email" value={{client.email}}> 
+
+            <div>
+                <p class="descricao">Telefone Secundário</p>
+                <div class="div-number-perfil">
+                    {% if client.phones.all.count > 1 %}
+                    <input type="text" id="phone2" size="3" class="input-dados-usuario" name="ddd2"
+                        value="{{ client.phones.all.last.ddd }}" style="width: 3em;">
+                    <input type="text" id="phone2" size="10" class="input-dados-usuario" name="phone2"
+                        pattern="[0-9]{5}-[0-9]{4}">
+                    {% else %}
+                    <input type="text" id="phone2" size="3" class="input-dados-usuario" name="ddd2" value=""
+                        style="width: 3em;">
+                    <input type="text" id="phone2" size="10" class="input-dados-usuario" name="phone2"
+                        pattern="[0-9]{5}-[0-9]{4}" value="">
+                    {% endif %}
                 </div>
-            </div> 
-            
-                <div class="row mb-3">
-                    <label class="col-sm-1 col-form-label" for="phone1">Telefone 1 </label>
-                    <div class="col-sm-11">
-                        <input type="text"  size="3" name="ddd1" value={{client.phones.all.first.ddd}}>
-                        <input type="text"  size="10" name="phone1" pattern="[0-9]{5}-[0-9]{4}" value={{client.phones.all.first.number}} > 
-                    </div>
-                </div>
-              
-                <div class="row mb-3">
-                    <label class="col-sm-1 col-form-label" for="phone2">Telefone 2 </label>
-                    <div class="col-sm-11">
-                        <input type="text" id="phone2" size="3" name="ddd2" value={{client.phones.all.last.ddd}}> 
-                        <input type="text" id="phone2" size="10" name="phone2" pattern="[0-9]{5}-[0-9]{4}" value={{client.phones.all.last.number}}> 
-                    </div>
-                </div>
-           
-            <hr>
-            <a class="btn btn-secondary btn-sm" href="/listClient">Voltar</a>
-            <input class="btn btn-primary" type="submit" value="Gravar">
-        </form>
+            </div>
+            <div class="div-number-perfil" style="margin-top: 3em;justify-content: flex-end;">
+                <a href="/deleteClient/{{client.id}}"><button class="button-3" style="margin: 0;">Excluir</button></a>
+                <a>
+                    <input class="button-1" type="submit" value="Salvar Dados">
+                </a>
+            </div>
+        </div>
+    </div>
+
+    </div>
+</form>
+
+
+<script>
+    'use strict'
+    let photo = document.getElementById('avatarView');
+    let file = document.getElementById('file');
+    let buttonIMGinput = document.getElementById('fileInput')
+
+    photo.addEventListener('click', () => {
+        file.click();
+    });
+
+    buttonIMGinput.addEventListener('click', () => {
+        file.click();
+    });
+
+
+    file.addEventListener('change', () => {
+
+        if (file.files.length <= 0) {
+            return;
+        }
+
+        let reader = new FileReader();
+
+        reader.onload = () => {
+            photo.src = reader.result;
+        }
+
+        reader.readAsDataURL(file.files[0]);
+
+    });
+</script>
 {% endblock %}
