@@ -60,7 +60,8 @@ class AluguelDAO:
     def salvaAluguel(self, date, start_hours, end_hours, client_id, theme_id, address_data):
         address = Address.objects.create(**address_data)
         total_price = CalculaAluguel().calcDesconto(client_id, theme_id, date)
-        Rent.objects.create(date=date, start_hours=start_hours, end_hours=end_hours,client_id=client_id, theme_id=theme_id, address=address,total_price=total_price)
+        r = Rent(date=date, start_hours=start_hours, end_hours=end_hours,client_id=client_id, theme_id=theme_id, address=address,total_price=total_price)
+        r.save()
     
     def deletaAluguel(self, id):
         rent = Rent.objects.get(pk=id)
